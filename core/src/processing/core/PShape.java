@@ -206,13 +206,15 @@ public class PShape implements PConstants {
   protected PShape parent;
   protected int childCount;
   protected PShape[] children;
-
+  
+  protected boolean breakShape = false;
 
   /** Array of VERTEX, BEZIER_VERTEX, and CURVE_VERTEX calls. */
   protected int vertexCodeCount;
   protected int[] vertexCodes;
   /** True if this is a closed path. */
   protected boolean close;
+
 
   // ........................................................
 
@@ -353,7 +355,7 @@ public class PShape implements PConstants {
 
     // To make sure that the first vertex is marked as a break.
     // Same behavior as in the immediate mode.
-//    breakShape = false;
+    breakShapeIs(false);
 
     if (family == GROUP) {
       // GROUP shapes are always marked as ended.
@@ -652,7 +654,15 @@ public class PShape implements PConstants {
       vertexCodes = PApplet.expand(vertexCodes);
     }
     vertexCodes[vertexCodeCount++] = BREAK;
+    breakShapeIs(true);
+    System.err.println("void beginContourImpl(): je suis là");
   }
+
+  public void breakShapeIs(boolean is) {
+    this.breakShape = is;
+
+  }
+
 
 
   /**
@@ -685,6 +695,9 @@ public class PShape implements PConstants {
 
 
   public void vertex(float x, float y) {
+    System.err.println("void vertex()");
+    System.err.println(x);
+    System.err.println(y);
     if (vertices == null) {
       vertices = new float[10][2];
     } else if (vertices.length == vertexCount) {
@@ -708,6 +721,9 @@ public class PShape implements PConstants {
   }
 
 
+
+
+
   public void vertex(float x, float y, float u, float v) {
   }
 
@@ -719,6 +735,7 @@ public class PShape implements PConstants {
 
   public void vertex(float x, float y, float z, float u, float v) {
   }
+
 
 
   public void normal(float nx, float ny, float nz) {

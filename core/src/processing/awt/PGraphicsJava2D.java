@@ -877,15 +877,25 @@ public class PGraphicsJava2D extends PGraphics {
       if (gpath == null) {
         gpath = new GeneralPath();
         gpath.moveTo(x, y);
+        System.err.println("end JAVA2D, void vertex()");
+        System.err.println(x);
+       System.err.println(y);
       } else if (breakShape) {
+        System.err.println(" breakshape JAVA2D, void vertex()");
+        System.err.println(x);
+       System.err.println(y);
         gpath.moveTo(x, y);
         breakShape = false;
       } else {
+         System.err.println(" draw JAVA2D, void vertex()");
+        System.err.println(x);
+       System.err.println(y);
         gpath.lineTo(x, y);
       }
       break;
     }
   }
+
 
 
   @Override
@@ -908,6 +918,13 @@ public class PGraphicsJava2D extends PGraphics {
   @Override
   public void vertex(float x, float y, float z, float u, float v) {
     showDepthWarningXYZ("vertex");
+  }
+
+
+  @Override
+  public void breakShapeIs(boolean is) {
+    System.err.println(" draw JAVA2D, void breakShapeIs()");
+    this.breakShape = is;
   }
 
 

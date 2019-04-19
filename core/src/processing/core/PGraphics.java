@@ -1728,6 +1728,11 @@ public class PGraphics extends PImage implements PConstants {
   }
 
 
+  protected void breakShapeIs(boolean is) {
+    
+  }
+
+
 
   //////////////////////////////////////////////////////////////
 
